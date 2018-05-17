@@ -7,6 +7,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * This class describes implementation of the Factory, which we use to connect to DB.
+ * This connection is unique, because we use Singleton pattern.
+ *
+ * @author sirko
+ * * */
 public class DAOFactoryImpl implements DAOFactory {
     private static DAOFactoryImpl instance = new DAOFactoryImpl();
 
@@ -40,7 +46,7 @@ public class DAOFactoryImpl implements DAOFactory {
 
     @Override
     public DAOHuman getDAOHumanImpl(Connection connection) {
-        return null;
+        return new DAOHumanImpl(connection);
     }
 
     @Override

@@ -13,7 +13,7 @@ public class Human {
     public Human() {
     }
 
-    public Human(String passportNumber, String firstName, String secondName, String lastName, Date birthday) {
+    Human(String passportNumber, String firstName, String secondName, String lastName, Date birthday) {
         this.passportNumber = passportNumber;
         this.firstName = firstName;
         this.secondName = secondName;
