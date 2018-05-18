@@ -11,6 +11,9 @@
     <title>$Title$</title>
   </head>
   <body>
+  <%
+      response.sendRedirect("jsp/login.jsp");
+  %>
   $END$
   </body>
 </html>
