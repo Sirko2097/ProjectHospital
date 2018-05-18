@@ -55,7 +55,7 @@ public class DAOFactoryImpl implements DAOFactory {
     }
 
     @Override
-    public DAOPatient getDAOPatientImpl(Connection connection) {
-        return null;
+    public DAOPatientImpl getDAOPatientImpl(Connection connection) {
+        return new DAOPatientImpl(connection);
     }
 }

@@ -29,7 +29,9 @@ public class DAOHumanImpl implements DAOHuman {
 
             return human;
         } else {
-            return null;
+            return null; //throw exception???
         }
     }
+
+
 }

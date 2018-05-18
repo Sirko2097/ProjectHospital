@@ -4,22 +4,22 @@ import java.sql.Date;
 import java.util.Objects;
 
 public class Patient extends Human {
-    private String patientCard;
+    private int patientCard;
 
     public Patient() {
     }
 
     public Patient(String passportNumber, String firstName, String secondName, String lastName,
-                   Date birthday, String patientCard) {
+                   Date birthday, int patientCard) {
         super(passportNumber, firstName, secondName, lastName, birthday);
         this.patientCard = patientCard;
     }
 
-    public String getPatientCard() {
+    public int getPatientCard() {
         return patientCard;
     }
 
-    public void setPatientCard(String patientCard) {
+    public void setPatientCard(int patientCard) {
         this.patientCard = patientCard;
     }
 
