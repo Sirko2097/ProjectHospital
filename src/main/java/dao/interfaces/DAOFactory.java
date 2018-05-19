@@ -1,16 +1,21 @@
 package dao.interfaces;
 
+import dao.implementations.DAODoctorImpl;
+import dao.implementations.DAOHumanImpl;
+import dao.implementations.DAONurseImpl;
+import dao.implementations.DAOPatientImpl;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public interface DAOFactory {
     Connection getConnection() throws SQLException;
 
-    DAODoctor getDAODoctorImpl(Connection connection);
+    DAODoctorImpl getDAODoctorImpl(Connection connection);
 
-    DAOHuman getDAOHumanImpl(Connection connection);
+    DAOHumanImpl getDAOHumanImpl(Connection connection);
 
-    DAONurse getDAONurseImpl(Connection connection);
+    DAONurseImpl getDAONurseImpl(Connection connection);
 
-    DAOPatient getDAOPatientImpl(Connection connection);
+    DAOPatientImpl getDAOPatientImpl(Connection connection);
 }

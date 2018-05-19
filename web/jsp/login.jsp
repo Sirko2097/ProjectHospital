@@ -14,16 +14,20 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body class="container">
-    <p>Input your license number and password</p>
+    <h2>Input your license number and password</h2>
+
     <form method="post">
         <div class="form-group">
-            <label for="usr">License:</label>
-            <input type="text" class="form-control" id="usr">
+            <label for="license">License:</label>
+            <input type="text" class="form-control" id="license">
         </div>
         <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password">
         </div>
+
+        <input type="submit" class="btn btn-info" value="Log In"/>
+
     </form>
 </body>
 </html>

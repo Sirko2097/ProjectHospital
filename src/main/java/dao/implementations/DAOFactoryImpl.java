@@ -40,17 +40,17 @@ public class DAOFactoryImpl implements DAOFactory {
     }
 
     @Override
-    public DAODoctor getDAODoctorImpl(Connection connection) {
-        return null;
+    public DAODoctorImpl getDAODoctorImpl(Connection connection) {
+        return new DAODoctorImpl(connection);
     }
 
     @Override
-    public DAOHuman getDAOHumanImpl(Connection connection) {
+    public DAOHumanImpl getDAOHumanImpl(Connection connection) {
         return new DAOHumanImpl(connection);
     }
 
     @Override
-    public DAONurse getDAONurseImpl(Connection connection) {
+    public DAONurseImpl getDAONurseImpl(Connection connection) {
         return null;
     }
 
