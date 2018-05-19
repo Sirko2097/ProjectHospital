@@ -1,7 +1,7 @@
 package dao.implementations;
 
 import dao.interfaces.*;
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class DAOFactoryImpl implements DAOFactory {
     private static DAOFactoryImpl instance = new DAOFactoryImpl();
 
-    private static final Logger logger = Logger.getLogger(DAOFactoryImpl.class);
+//    private static final Logger logger = Logger.getLogger(DAOFactoryImpl.class);
 
     public static DAOFactoryImpl getInstance() {
         return instance;
@@ -27,7 +27,8 @@ public class DAOFactoryImpl implements DAOFactory {
             String driver = "com.mysql.jdbc.Driver";
             Class.forName(driver);
         } catch (ClassNotFoundException ex) {
-            logger.error(ex);
+//            logger.error(ex);
+            ex.printStackTrace();
         }
     }
 

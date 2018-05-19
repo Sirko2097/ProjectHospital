@@ -2,7 +2,6 @@ package controller;
 
 import dao.implementations.DAODoctorImpl;
 import dao.implementations.DAOFactoryImpl;
-import model.Doctor;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,7 +30,12 @@ public class LogInServlet extends HttpServlet {
         try {
             Connection connection = DAOFactoryImpl.getInstance().getConnection();
             DAODoctorImpl daoDoctor = DAOFactoryImpl.getInstance().getDAODoctorImpl(connection);
-
+            boolean availability = daoDoctor.docLogin(req.getParameter("license"), req.getParameter("password"));
+            if (availability) {
+                resp.sendRedirect("jsp/success.jsp");
+            } else {
+                resp.sendRedirect("jsp/errorPage.jsp");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

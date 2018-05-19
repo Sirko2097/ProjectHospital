@@ -19,15 +19,14 @@
     <form method="post">
         <div class="form-group">
             <label for="license">License:</label>
-            <input type="text" class="form-control" id="license">
+            <input type="text" class="form-control" id="license" name="license" placeholder="Enter your license" required>
         </div>
         <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" class="form-control" id="password">
+            <label for="password">Password: </label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
         </div>
 
-        <input type="submit" class="btn btn-info" value="Log In"/>
-
+        <input type="submit" class="btn btn-info" value="Log In" formmethod="post"/>
     </form>
 </body>
 </html>

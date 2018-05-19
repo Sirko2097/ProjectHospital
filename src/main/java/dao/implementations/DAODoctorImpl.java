@@ -47,10 +47,11 @@ public class DAODoctorImpl implements DAODoctor {
      * */
     @Override
     public boolean docLogin(String licenseNumber, String password) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT EXISTS(SELECT\n" +
-                "               license_number,\n" +
-                "               password\n" +
-                "             FROM DOCTOR)");
-        return preparedStatement.execute();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT license_number, password " +
+                "FROM DOCTOR WHERE license_number=? AND password=?");
+        preparedStatement.setString(1, licenseNumber);
+        preparedStatement.setString(2, password);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        return resultSet.next();
     }
 }
