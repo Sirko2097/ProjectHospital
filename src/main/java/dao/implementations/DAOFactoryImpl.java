@@ -52,7 +52,7 @@ public class DAOFactoryImpl implements DAOFactory {
 
     @Override
     public DAONurseImpl getDAONurseImpl(Connection connection) {
-        return null;
+        return new DAONurseImpl(connection);
     }
 
     @Override

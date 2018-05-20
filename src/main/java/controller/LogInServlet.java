@@ -2,6 +2,7 @@ package controller;
 
 import dao.implementations.DAODoctorImpl;
 import dao.implementations.DAOFactoryImpl;
+import dao.implementations.DAONurseImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,8 +31,14 @@ public class LogInServlet extends HttpServlet {
         try {
             Connection connection = DAOFactoryImpl.getInstance().getConnection();
             DAODoctorImpl daoDoctor = DAOFactoryImpl.getInstance().getDAODoctorImpl(connection);
+            DAONurseImpl daoNurse = DAOFactoryImpl.getInstance().getDAONurseImpl(connection);
+
+            boolean nurseAvailability = daoNurse.nurseLogin(req.getParameter("license"), req.getParameter("password"));
             boolean doctorAvailability = daoDoctor.docLogin(req.getParameter("license"), req.getParameter("password"));
+
             if (doctorAvailability) {
+                resp.sendRedirect("jsp/success.jsp");
+            } else if (nurseAvailability){
                 resp.sendRedirect("jsp/success.jsp");
             } else {
                 resp.sendRedirect("jsp/errorPage.jsp");
