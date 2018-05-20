@@ -2,8 +2,10 @@ package dao.implementations;
 
 import dao.interfaces.DAODoctor;
 import model.Doctor;
+import model.Patient;
 
 import java.sql.*;
+import java.util.List;
 
 public class DAODoctorImpl implements DAODoctor {
     private final Connection connection;
@@ -37,6 +39,17 @@ public class DAODoctorImpl implements DAODoctor {
         } else {
             return null;
         }
+    }
+
+    /**
+     * This method returns all patients who the doctor treats
+     * @param licenseNumber - license number of doctor
+     * @param cardNumber - card number of patient
+     * @return list of patients
+     * */
+    @Override
+    public List<Patient> getAllPatients(String licenseNumber, String cardNumber) throws SQLException {
+        return null;
     }
 
     /**
