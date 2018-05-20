@@ -38,8 +38,10 @@ public class LogInServlet extends HttpServlet {
 
             if (doctorAvailability) {
                 resp.sendRedirect("jsp/success.jsp");
+                req.setAttribute("lastName", daoDoctor.read(req.getParameter("license")).getLastName());
             } else if (nurseAvailability){
                 resp.sendRedirect("jsp/success.jsp");
+                req.setAttribute("lastName", daoNurse.read(req.getParameter("license")).getLastName());
             } else {
                 resp.sendRedirect("jsp/errorPage.jsp");
             }
