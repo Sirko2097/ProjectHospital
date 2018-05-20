@@ -30,8 +30,8 @@ public class LogInServlet extends HttpServlet {
         try {
             Connection connection = DAOFactoryImpl.getInstance().getConnection();
             DAODoctorImpl daoDoctor = DAOFactoryImpl.getInstance().getDAODoctorImpl(connection);
-            boolean availability = daoDoctor.docLogin(req.getParameter("license"), req.getParameter("password"));
-            if (availability) {
+            boolean doctorAvailability = daoDoctor.docLogin(req.getParameter("license"), req.getParameter("password"));
+            if (doctorAvailability) {
                 resp.sendRedirect("jsp/success.jsp");
             } else {
                 resp.sendRedirect("jsp/errorPage.jsp");

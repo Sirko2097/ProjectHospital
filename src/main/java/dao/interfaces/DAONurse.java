@@ -7,5 +7,5 @@ import java.sql.SQLException;
 public interface DAONurse {
     Nurse read(String key) throws SQLException;
 
-    boolean nurseLogi(String licenseNumber, String password);
+    boolean nurseLogin(String licenseNumber, String password) throws SQLException;
 }
