@@ -8,9 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>Index</title>
   </head>
-  <body>
-  <button onclick="location.href='/login'" formmethod="post">Log In</button>
+  <body class="container">
+    <h1>Welcome!</h1>
+    <input type="button" class="btn btn-info" onclick="location.href='/login'" formmethod="post" value="Log In"/>
   </body>
 </html>
