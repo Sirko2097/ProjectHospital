@@ -14,7 +14,7 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
-  <div class="container">
+  <div class="container" align="center">
       <div class="jumbotron">
         <h1>Welcome!</h1>
         <button type="button" class="btn btn-primary" onclick="location.href='/login'">Log In</button>

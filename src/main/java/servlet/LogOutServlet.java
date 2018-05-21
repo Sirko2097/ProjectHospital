@@ -1,4 +1,4 @@
-package controller;
+package servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +19,8 @@ public class LogOutServlet extends HttpServlet {
         service(req, resp);
     }
 
-    protected void service(HttpServletRequest request, HttpServletResponse response) {
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.getSession().invalidate();
+        response.sendRedirect("/");
     }
 }
