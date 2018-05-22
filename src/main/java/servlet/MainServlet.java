@@ -41,15 +41,34 @@ public class MainServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Output table with all doctor's patients
+     * */
     private void getAllDoctorPatients(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         Connection connection = DAOFactoryImpl.getInstance().getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("");
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT\n" +
+                "  first_name,\n" +
+                "  second_name,\n" +
+                "  last_name,\n" +
+                "  birthday,\n" +
+                "  card_number\n" +
+                "FROM HUMAN\n" +
+                "  JOIN PATIENT P ON HUMAN.passport_number = P.passport_number\n" +
+                "  JOIN DOCTOR_PATIENT D ON P.card_number = D.patient_card\n" +
+                "  JOIN DOCTOR D2 on D.license = D2.license_number\n" +
+                "WHERE license_number = ?");
+        preparedStatement.setString(1, request.getParameter("license"));
         ResultSet resultSet = preparedStatement.executeQuery();
 
         List<Patient> patients = new ArrayList<>();
 
         while (resultSet.next()) {
-
+            patients.add(new Patient(resultSet.getString(1),
+                    resultSet.getString(2), resultSet.getString(3),
+                    resultSet.getDate(4), resultSet.getInt(5)));
         }
+
+        request.setAttribute("patients", patients);
+
     }
 }

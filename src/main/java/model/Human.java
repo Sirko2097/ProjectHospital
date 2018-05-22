@@ -10,7 +10,15 @@ public class Human {
     private String lastName;
     private Date birthday;
 
+    public Human(String firstName, String secondName, String lastName, Date birthday) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+    }
+
     public Human() {
+
     }
 
     Human(String passportNumber, String firstName, String secondName, String lastName, Date birthday) {

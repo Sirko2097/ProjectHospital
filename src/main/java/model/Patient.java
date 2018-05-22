@@ -15,6 +15,11 @@ public class Patient extends Human {
         this.patientCard = patientCard;
     }
 
+    public Patient(String firstName, String secondName, String lastName, Date birthday, int patientCard) {
+        super(firstName, secondName, lastName, birthday);
+        this.patientCard = patientCard;
+    }
+
     public int getPatientCard() {
         return patientCard;
     }
