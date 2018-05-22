@@ -21,8 +21,8 @@ import java.util.List;
  * This servlet was developed for producing main function of application.
  * From this servlet doctor can write a patient's medical certificate.
  * */
-@WebServlet("/main")
-public class MainServlet extends HttpServlet {
+@WebServlet("/patients")
+public class ListOfPatientsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {

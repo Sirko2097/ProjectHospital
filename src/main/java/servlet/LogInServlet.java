@@ -37,8 +37,9 @@ public class LogInServlet extends HttpServlet {
             boolean doctorAvailability = daoDoctor.docLogin(req.getParameter("license"), req.getParameter("password"));
 
             if (doctorAvailability) {
-                resp.sendRedirect("jsp/success.jsp");
+                System.out.println(daoDoctor.read(req.getParameter("license")).getLastName());
                 req.setAttribute("lastName", daoDoctor.read(req.getParameter("license")).getLastName());
+                req.getRequestDispatcher("jsp/success.jsp").forward(req, resp);
             } else if (nurseAvailability){
                 resp.sendRedirect("jsp/success.jsp");
                 req.setAttribute("lastName", daoNurse.read(req.getParameter("license")).getLastName());
