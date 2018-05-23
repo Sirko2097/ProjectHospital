@@ -26,7 +26,7 @@ public class ListOfNewPatientsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            getAllDoctorPatients(req, resp);
+            getAllNewPatients(req, resp);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -35,20 +35,20 @@ public class ListOfNewPatientsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            getAllDoctorPatients(req, resp);
+            getAllNewPatients(req, resp);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Output table with all doctor's patients
+     * Output table with all new patients
      * */
-    private void getAllDoctorPatients(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+    private void getAllNewPatients(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         Connection connection = DAOFactoryImpl.getInstance().getConnection();
 
         String license = request.getSession().getAttribute("license").toString();
-
+        /*Add checking for profession(doc or nurse)*/
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT\n" +
                 "  first_name,\n" +
                 "  second_name,\n" +

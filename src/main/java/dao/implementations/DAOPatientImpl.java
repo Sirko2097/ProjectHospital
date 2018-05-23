@@ -5,11 +5,13 @@ import model.Human;
 import model.Patient;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DAOPatientImpl implements DAOPatient {
-    Connection connection;
+    private final Connection connection;
 
-    public DAOPatientImpl(Connection connection) {
+    DAOPatientImpl(Connection connection) {
         this.connection = connection;
     }
 
@@ -35,5 +37,29 @@ public class DAOPatientImpl implements DAOPatient {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<Patient> getAllPatients() throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+                "P.passport_number," +
+                "first_name," +
+                "second_name," +
+                "last_name," +
+                "birthday," +
+                "card_number" +
+                " FROM HUMAN" +
+                " JOIN PATIENT P on HUMAN.passport_number = P.passport_number");
+
+        List<Patient> patients = new ArrayList<>();
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            patients.add(new Patient(resultSet.getString(1),
+                    resultSet.getString(2), resultSet.getString(3),
+                    resultSet.getString(4), resultSet.getDate(5),
+                    resultSet.getInt(6)));
+        }
+        return patients;
     }
 }
