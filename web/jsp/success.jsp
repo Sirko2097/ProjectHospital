@@ -20,7 +20,9 @@
         if(request.getAttribute("lastName") != null) {
             out.println("Hello, " + request.getAttribute("lastName"));
         }
-    %> <br>
+    %>
+    <br>
     <input type="submit" class="btn btn-danger" value="Log Out" onclick="location.href='/logout'"/>
+    <input type="button" class="btn btn-info" value="New patients" onclick="location.href='/newPatients'"/>
 </body>
 </html>

@@ -21,8 +21,8 @@ import java.util.List;
  * This servlet was developed for producing main function of application.
  * From this servlet doctor can write a patient's medical certificate.
  * */
-@WebServlet("/patients")
-public class ListOfPatientsServlet extends HttpServlet {
+@WebServlet("/newPatients")
+public class ListOfNewPatientsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
@@ -44,8 +44,11 @@ public class ListOfPatientsServlet extends HttpServlet {
     /**
      * Output table with all doctor's patients
      * */
-    private void getAllDoctorPatients(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+    private void getAllDoctorPatients(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         Connection connection = DAOFactoryImpl.getInstance().getConnection();
+
+        String license = request.getSession().getAttribute("license").toString();
+
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT\n" +
                 "  first_name,\n" +
                 "  second_name,\n" +
@@ -56,8 +59,8 @@ public class ListOfPatientsServlet extends HttpServlet {
                 "  JOIN PATIENT P ON HUMAN.passport_number = P.passport_number\n" +
                 "  JOIN DOCTOR_PATIENT D ON P.card_number = D.patient_card\n" +
                 "  JOIN DOCTOR D2 on D.license = D2.license_number\n" +
-                "WHERE license_number = ?");
-        preparedStatement.setString(1, request.getParameter("license"));
+                "WHERE license_number = '" + license + "'");
+
         ResultSet resultSet = preparedStatement.executeQuery();
 
         List<Patient> patients = new ArrayList<>();
@@ -69,6 +72,8 @@ public class ListOfPatientsServlet extends HttpServlet {
         }
 
         request.setAttribute("patients", patients);
+        request.getRequestDispatcher("jsp/listOfNewPatients.jsp").forward(request, response);
+
 
     }
 }

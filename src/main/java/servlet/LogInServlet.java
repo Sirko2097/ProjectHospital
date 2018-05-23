@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -28,6 +29,7 @@ public class LogInServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
         try {
             Connection connection = DAOFactoryImpl.getInstance().getConnection();
             DAODoctorImpl daoDoctor = DAOFactoryImpl.getInstance().getDAODoctorImpl(connection);
@@ -37,9 +39,12 @@ public class LogInServlet extends HttpServlet {
             boolean doctorAvailability = daoDoctor.docLogin(req.getParameter("license"), req.getParameter("password"));
 
             if (doctorAvailability) {
-                System.out.println(daoDoctor.read(req.getParameter("license")).getLastName());
                 req.setAttribute("lastName", daoDoctor.read(req.getParameter("license")).getLastName());
-                req.getRequestDispatcher("jsp/success.jsp").forward(req, resp);
+                session.setAttribute("license", req.getParameter("license"));
+
+                RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/success.jsp");
+                requestDispatcher.include(req, resp);
+
             } else if (nurseAvailability){
                 resp.sendRedirect("jsp/success.jsp");
                 req.setAttribute("lastName", daoNurse.read(req.getParameter("license")).getLastName());
@@ -51,4 +56,5 @@ public class LogInServlet extends HttpServlet {
         }
 
     }
+
 }

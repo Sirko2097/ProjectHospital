@@ -18,7 +18,8 @@
 </head>
 <body class="container">
 <div class="jumbotron">
-    <table>
+    <h2 align="center">Your new patients</h2>
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>First name</th>
@@ -32,8 +33,15 @@
             <%
                 List<Patient> patients = (List<Patient>) request.getAttribute("patients");
                 if (patients != null && !patients.isEmpty()) {
-                    PrintWriter writer = response.getWriter();
-                    writer.println("");
+                    for (Patient patient : patients) {
+                        out.println("<tr class=\"info\">" +
+                                "<td>" + patient.getFirstName() + "</td>" +
+                                "<td>" + patient.getSecondName() + "</td>" +
+                                "<td>" + patient.getLastName() + "</td>" +
+                                "<td>" + patient.getBirthday() + "</td>" +
+                                "<td>" + patient.getPatientCard() + "</td>" +
+                                "</tr>");
+                    }
                 }
             %>
         </tbody>
