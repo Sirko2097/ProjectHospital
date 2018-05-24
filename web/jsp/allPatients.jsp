@@ -1,4 +1,5 @@
-<%--
+<%@ page import="model.Patient" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: sirko
   Date: 24.05.18
@@ -13,7 +14,38 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>
-
+<body class="container">
+    <div align="center" class="jumbotron">
+        <h2>All Patients in the Hospital</h2>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Passport Number</th>
+                <th>First name</th>
+                <th>Second name</th>
+                <th>Last name</th>
+                <th>Birthday</th>
+                <th>Card Number</th>
+            </tr>
+            </thead>
+            <tbody>
+                <%
+                    List<Patient> patients = (List<Patient>) request.getAttribute("patientsInTheHospital");
+                    if (patients != null && !patients.isEmpty()) {
+                        for (Patient patient : patients) {
+                            out.println("<tr class=\"info\">" +
+                                    "<td>" + patient.getPassportNumber() + "</td>" +
+                                    "<td>" + patient.getFirstName() + "</td>" +
+                                    "<td>" + patient.getSecondName() + "</td>" +
+                                    "<td>" + patient.getLastName() + "</td>" +
+                                    "<td>" + patient.getBirthday() + "</td>" +
+                                    "<td>" + patient.getPatientCard() + "</td>" +
+                                    "</tr>");
+                        }
+                    }
+                %>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

@@ -42,11 +42,11 @@ public class LogInServlet extends HttpServlet {
                 req.setAttribute("lastName", daoDoctor.read(req.getParameter("license")).getLastName());
                 session.setAttribute("license", req.getParameter("license"));
 
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/success.jsp");
+                RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/mainMenu.jsp");
                 requestDispatcher.include(req, resp);
 
             } else if (nurseAvailability){
-                resp.sendRedirect("jsp/success.jsp");
+                resp.sendRedirect("jsp/mainMenu.jsp");
                 req.setAttribute("lastName", daoNurse.read(req.getParameter("license")).getLastName());
             } else {
                 resp.sendRedirect("jsp/errorPage.jsp");

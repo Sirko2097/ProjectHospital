@@ -5,6 +5,7 @@ import dao.implementations.DAOPatientImpl;
 import model.Patient;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import java.util.List;
 /**
  * Servlet, which output table with all patients in the hospital.
  * */
+@WebServlet("/allPatients")
 public class ListOfAllPatientsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,6 +45,6 @@ public class ListOfAllPatientsServlet extends HttpServlet {
 
         List<Patient> patients = daoPatient.getAllPatients();
         request.setAttribute("patientsInTheHospital", patients);
-        request.getRequestDispatcher("jsp/listOfAllPatients").forward(request, response);
+        request.getRequestDispatcher("jsp/allPatients.jsp").forward(request, response);
     }
 }
