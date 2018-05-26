@@ -15,6 +15,6 @@
 </head>
 <body class="container">
     <h2 class="danger">Login or password are incorrect.</h2>
-    <button type="button" class="btn btn-danger" onclick="location.href='/'">Try Again</button>
+    <button type="button" class="btn btn-danger" onclick="location.href='/login'">Try Again</button>
 </body>
 </html>

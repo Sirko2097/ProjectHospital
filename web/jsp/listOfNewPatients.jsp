@@ -47,5 +47,9 @@
         </tbody>
     </table>
 </div>
+<div class="footer">
+    <input type="button" class="btn btn-info" value="Back to Main Menu" onclick="location='jsp/mainMenu.jsp';"/>
+    <input type="submit" class="btn btn-danger" value="Log Out" onclick="location.href='/logout'" align="right"/>
+</div>
 </body>
 </html>

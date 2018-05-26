@@ -7,10 +7,7 @@ import dao.implementations.DAONurseImpl;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -35,19 +32,31 @@ public class LogInServlet extends HttpServlet {
             DAODoctorImpl daoDoctor = DAOFactoryImpl.getInstance().getDAODoctorImpl(connection);
             DAONurseImpl daoNurse = DAOFactoryImpl.getInstance().getDAONurseImpl(connection);
 
-            boolean nurseAvailability = daoNurse.nurseLogin(req.getParameter("license"), req.getParameter("password"));
-            boolean doctorAvailability = daoDoctor.docLogin(req.getParameter("license"), req.getParameter("password"));
+            String license = req.getParameter("license");
+            String password = req.getParameter("password");
+
+            boolean nurseAvailability = daoNurse.nurseLogin(license, password);
+            boolean doctorAvailability = daoDoctor.docLogin(license, password);
+
+            String lastName;
 
             if (doctorAvailability) {
-                req.setAttribute("lastName", daoDoctor.read(req.getParameter("license")).getLastName());
-                session.setAttribute("license", req.getParameter("license"));
+                lastName = daoDoctor.read(license).getLastName();
+                req.setAttribute("lastName", lastName);
+                session.setAttribute("license", license);
 
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/mainMenu.jsp");
                 requestDispatcher.include(req, resp);
-
             } else if (nurseAvailability){
-                resp.sendRedirect("jsp/mainMenu.jsp");
-                req.setAttribute("lastName", daoNurse.read(req.getParameter("license")).getLastName());
+                lastName = daoNurse.read(license).getLastName();
+                req.setAttribute("lastName", lastName);
+                session.setAttribute("license", license);
+
+                Cookie nurseCookie = new Cookie("Nurse", lastName);
+                resp.addCookie(nurseCookie);
+
+                RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/mainMenu.jsp");
+                requestDispatcher.include(req, resp);
             } else {
                 resp.sendRedirect("jsp/errorPage.jsp");
             }

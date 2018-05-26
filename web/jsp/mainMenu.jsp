@@ -14,16 +14,21 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body class="container">
+    <div class="header">
+        <%
+            if(request.getAttribute("lastName") != null) {
+                out.println("Hello, " + request.getAttribute("lastName"));
+            }
+        %>
+    </div>
     <h1>Log in successful!</h1>
     <br>
-    <%
-        if(request.getAttribute("lastName") != null) {
-            out.println("Hello, " + request.getAttribute("lastName"));
-        }
-    %>
+
     <br>
-    <input type="submit" class="btn btn-danger" value="Log Out" onclick="location.href='/logout'"/>
     <input type="button" class="btn btn-info" value="New patients" onclick="location.href='/newPatients'"/>
     <input type="button" class="btn btn-info" value="All patients" onclick="location.href='/allPatients'"/>
+    <div class="footer">
+        <input type="submit" class="btn btn-danger" value="Log Out" onclick="location.href='/logout'" align="right"/>
+    </div>
 </body>
 </html>
