@@ -9,9 +9,6 @@
 <html>
 <head>
     <title>Authentication</title>
-    <script>
-        history.forward();
-    </script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -20,13 +17,13 @@
     <div class="jumbotron">
         <h2>Input your license number and password</h2>
 
-        <form method="post">
+        <form action="login" method="post">
             <div class="form-group">
                 <label for="license">License:</label>
                 <input type="text" class="form-control" id="license" name="license" placeholder="Enter your license" required>
             </div>
             <div class="form-group">
-                <label for="password">Password: </label>
+                <label for="password">Password:</label>
                 <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
             </div>
 

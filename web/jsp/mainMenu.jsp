@@ -22,11 +22,10 @@
         %>
     </div>
     <div class="page-header">Welcome!</div>
-    <br>
-
-    <br>
-    <input type="button" class="btn btn-info" value="New patients" onclick="location.href='/newPatients'"/>
-    <input type="button" class="btn btn-info" value="All patients" onclick="location.href='/allPatients'"/>
+    <br><br>
+    <input type="button" class="btn btn-info" value="Your New Patients" onclick="location.href='/newPatients'"/>
+    <input type="button" class="btn btn-info" value="All Patients" onclick="location.href='/allPatients'"/>
+    <input type="button" class="btn btn-primary" value="Add New Patient" onclick="location.href='/addPatient'"/>
     <div class="footer">
         <input type="submit" class="btn btn-danger" value="Log Out" onclick="location.href='/logout'" align="right"/>
     </div>

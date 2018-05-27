@@ -41,18 +41,19 @@ public class DAOPatientImpl implements DAOPatient {
 
     @Override
     public void AddNewPatient(String passNumber, String firstName,  String secondName, String lastName,
-                              java.util.Date birthday, int cardNumber) throws SQLException{
+                              String birthday, String cardNumber) throws SQLException{
         try {
             connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " +
                     "HUMAN (passport_number, first_name, second_name, last_name, birthday) " +
                     "VALUES ('"+ passNumber + "','"+ firstName + "', '" + secondName +"', '"
-                    + lastName +"', birthday)");
+                    + lastName +"','" + birthday + "')");
             preparedStatement.execute();
 
             preparedStatement = connection.prepareStatement("INSERT INTO PATIENT (passport_number, card_number) " +
-                    "VALUES ('" + passNumber + "'," + cardNumber+ " )");
+                    "VALUES ('" + passNumber + "'," + Long.parseLong(cardNumber)+ " )");
             preparedStatement.execute();
+
             connection.commit();
         } catch (SQLException e) {
             connection.rollback();
