@@ -25,7 +25,7 @@ public class DAONurseImpl implements DAONurse {
                 "  `birthday`\n" +
                 "FROM NURSE\n" +
                 "  JOIN HUMAN H on NURSE.passport_number = H.passport_number " +
-                "WHERE `license_number`=" + key);
+                "WHERE `license_number`='" + key + "'");
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
             String licenseNUmber = resultSet.getString(1);
@@ -47,6 +47,7 @@ public class DAONurseImpl implements DAONurse {
         preparedStatement.setString(1, licenseNumber);
         preparedStatement.setString(2, password);
         ResultSet resultSet = preparedStatement.executeQuery();
+
         return resultSet.next();
     }
 }

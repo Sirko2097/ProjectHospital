@@ -27,6 +27,7 @@ public class LogInServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+
         try {
             Connection connection = DAOFactoryImpl.getInstance().getConnection();
             DAODoctorImpl daoDoctor = DAOFactoryImpl.getInstance().getDAODoctorImpl(connection);
@@ -46,7 +47,7 @@ public class LogInServlet extends HttpServlet {
                 session.setAttribute("license", license);
 
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/mainMenu.jsp");
-                requestDispatcher.include(req, resp);
+                requestDispatcher.forward(req, resp);
             } else if (nurseAvailability){
                 lastName = daoNurse.read(license).getLastName();
                 req.setAttribute("lastName", lastName);
@@ -56,7 +57,7 @@ public class LogInServlet extends HttpServlet {
                 resp.addCookie(nurseCookie);
 
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/mainMenu.jsp");
-                requestDispatcher.include(req, resp);
+                requestDispatcher.forward(req, resp);
             } else {
                 resp.sendRedirect("jsp/errorPage.jsp");
             }

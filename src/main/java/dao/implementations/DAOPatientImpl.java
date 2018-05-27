@@ -21,7 +21,7 @@ public class DAOPatientImpl implements DAOPatient {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT PATIENT.passport_number, first_name, second_name, " +
                 "last_name, birthday, card_number FROM PATIENT " +
                 "LEFT JOIN HUMAN H on PATIENT.passport_number = H.passport_number " +
-                "AND PATIENT.passport_number ='AT 567890'");
+                "AND PATIENT.passport_number ='" + key + "'");
 
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {

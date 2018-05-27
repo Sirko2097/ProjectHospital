@@ -27,7 +27,6 @@ public class DAODoctorImpl implements DAODoctor {
                 "  JOIN HUMAN H on DOCTOR.passport_number = H.passport_number " +
                 "WHERE `license_number`='" + key + "'");
         ResultSet resultSet = preparedStatement.executeQuery();
-
         if (resultSet.next()) {
             String licenseNUmber = resultSet.getString(1);
             String passNumber = resultSet.getString(2);
@@ -44,11 +43,12 @@ public class DAODoctorImpl implements DAODoctor {
     /**
      * This method returns all patients who the doctor treats
      * @param licenseNumber - license number of doctor
-     * @param cardNumber - card number of patient
      * @return list of patients
      * */
     @Override
-    public List<Patient> getAllPatients(String licenseNumber, String cardNumber) throws SQLException {
+    public List<Patient> getAllPatients(String licenseNumber) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("");
+        preparedStatement.execute();
         return null;
     }
 
@@ -65,6 +65,7 @@ public class DAODoctorImpl implements DAODoctor {
         preparedStatement.setString(1, licenseNumber);
         preparedStatement.setString(2, password);
         ResultSet resultSet = preparedStatement.executeQuery();
+
         return resultSet.next();
     }
 }

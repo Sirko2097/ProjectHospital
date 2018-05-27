@@ -1,5 +1,7 @@
 package servlet;
 
+import dao.implementations.DAOFactoryImpl;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -12,17 +14,13 @@ import java.io.IOException;
 public class LogOutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        service(req, resp);
+        req.logout();
+        req.getRequestDispatcher("/login").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        service(req, resp);
-    }
-
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        request.getSession().invalidate();
-
-        response.sendRedirect("jsp/login.jsp");
+        req.logout();
+        req.getRequestDispatcher("/login").forward(req, resp);
     }
 }
