@@ -15,8 +15,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body class="container">
-    <div align="center" class="jumbotron">
-        <h2>All Patients in the Hospital</h2>
+    <div align="center">
+        <div class="page-header">
+            <h2>All Patients in the Hospital</h2>
+        </div>
+        <div class="jumbotron">
         <table class="table table-hover">
             <thead>
             <tr>
@@ -46,6 +49,7 @@
                 %>
             </tbody>
         </table>
+        </div>
     </div>
     <div class="footer">
         <input type="button" class="btn btn-info" value="Back to Main Menu" onclick="location='jsp/mainMenu.jsp';"/>

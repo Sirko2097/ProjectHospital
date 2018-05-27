@@ -14,12 +14,15 @@ import java.sql.SQLException;
  * @author sirko
  * * */
 public class DAOFactoryImpl implements DAOFactory {
-    private static DAOFactoryImpl instance = new DAOFactoryImpl();
+    private static DAOFactoryImpl instance = null;
 
 //    private static final Logger logger = Logger.getLogger(DAOFactoryImpl.class);
 
     public static DAOFactoryImpl getInstance() {
-        return instance;
+        if (DAOFactoryImpl.instance == null)
+            DAOFactoryImpl.instance = new DAOFactoryImpl();
+
+        return DAOFactoryImpl.instance;
     }
 
     private DAOFactoryImpl() {

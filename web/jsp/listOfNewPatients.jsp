@@ -17,8 +17,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body class="container">
-<div class="jumbotron">
-    <h2 align="center">Your new patients</h2>
+    <div class="page-header"><h2 align="center">Your new patients</h2></div>
+    <div class="jumbotron">
     <table class="table table-hover">
         <thead>
             <tr>
