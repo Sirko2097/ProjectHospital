@@ -26,7 +26,6 @@ public class LogInServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
 
         try {
             Connection connection = DAOFactoryImpl.getInstance().getConnection();
@@ -40,24 +39,15 @@ public class LogInServlet extends HttpServlet {
             boolean doctorAvailability = daoDoctor.docLogin(license, password);
 
             String lastName;
+            String position;
 
             if (doctorAvailability) {
+                position = "Dr. ";
                 lastName = daoDoctor.read(license).getLastName();
-                req.setAttribute("lastName", lastName);
-                session.setAttribute("license", license);
-
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/mainMenu.jsp");
-                requestDispatcher.forward(req, resp);
+                sessionCreator(req, resp, position, license, lastName);
             } else if (nurseAvailability){
                 lastName = daoNurse.read(license).getLastName();
-                req.setAttribute("lastName", lastName);
-                session.setAttribute("license", license);
-
-                Cookie nurseCookie = new Cookie("Nurse", lastName);
-                resp.addCookie(nurseCookie);
-
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/mainMenu.jsp");
-                requestDispatcher.forward(req, resp);
+                sessionCreator(req, resp, null, license, lastName);
             } else {
                 resp.sendRedirect("jsp/errorPage.jsp");
             }
@@ -65,6 +55,17 @@ public class LogInServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+    }
+    private void sessionCreator(HttpServletRequest req, HttpServletResponse resp,
+                                String position, String license, String lastName) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+
+        session.setAttribute("position", position);
+        session.setAttribute("lastName", lastName);
+        session.setAttribute("license", license);
+
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/mainMenu.jsp");
+        requestDispatcher.forward(req, resp);
     }
 
 }

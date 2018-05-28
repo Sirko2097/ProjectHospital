@@ -17,7 +17,7 @@
   <div class="container" align="center">
       <div class="jumbotron">
         <h1>Welcome!</h1>
-        <button type="button" class="btn btn-primary" onclick="location.href='/login'">Log In</button>
+        <button type="button" class="btn btn-primary btn-block" onclick="location.href='/login'">Get Started</button>
       </div>
   </div>
   </body>

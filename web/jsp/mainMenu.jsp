@@ -14,14 +14,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body class="container">
-    <div class="header">
+    <div class="page-header">
+        <h2 align="center">
         <%
-            if(request.getAttribute("lastName") != null) {
-                out.println("Hello, " + request.getAttribute("lastName"));
+            if(request.getSession().getAttribute("lastName") != null) {
+                out.println("Welcome, " + request.getSession().getAttribute("position")
+                        + request.getSession().getAttribute("lastName") + "!");
             }
         %>
+        </h2>
     </div>
-    <div class="page-header">Welcome!</div>
     <br><br>
     <input type="button" class="btn btn-info" value="Your New Patients" onclick="location.href='/newPatients'"/>
     <input type="button" class="btn btn-info" value="All Patients" onclick="location.href='/allPatients'"/>

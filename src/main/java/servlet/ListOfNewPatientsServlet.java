@@ -1,6 +1,7 @@
 package servlet;
 
 import dao.implementations.DAOFactoryImpl;
+import dao.implementations.DAOPatientImpl;
 import model.Patient;
 
 import javax.servlet.ServletException;
@@ -47,28 +48,31 @@ public class ListOfNewPatientsServlet extends HttpServlet {
     private void getAllNewPatients(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         Connection connection = DAOFactoryImpl.getInstance().getConnection();
 
-        String license = request.getSession().getAttribute("license").toString();
-        /*Add checking for profession(doc or nurse)*/
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT\n" +
-                "  first_name,\n" +
-                "  second_name,\n" +
-                "  last_name,\n" +
-                "  birthday,\n" +
-                "  card_number\n" +
-                "FROM HUMAN\n" +
-                "  JOIN PATIENT P ON HUMAN.passport_number = P.passport_number\n" +
-                "  JOIN DOCTOR_PATIENT D ON P.card_number = D.patient_card\n" +
-                "  JOIN DOCTOR D2 on D.license = D2.license_number\n" +
-                "WHERE license_number = '" + license + "'");
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-
         List<Patient> patients = new ArrayList<>();
 
-        while (resultSet.next()) {
-            patients.add(new Patient(resultSet.getString(1),
-                    resultSet.getString(2), resultSet.getString(3),
-                    resultSet.getDate(4), resultSet.getInt(5)));
+        String license = request.getSession().getAttribute("license").toString();
+        if (request.getSession().getAttribute("position") != null) {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT\n" +
+                    "  first_name,\n" +
+                    "  second_name,\n" +
+                    "  last_name,\n" +
+                    "  birthday,\n" +
+                    "  card_number\n" +
+                    "FROM HUMAN\n" +
+                    "  JOIN PATIENT P ON HUMAN.passport_number = P.passport_number\n" +
+                    "  JOIN DOCTOR_PATIENT D ON P.card_number = D.patient_card\n" +
+                    "  JOIN DOCTOR D2 on D.license = D2.license_number\n" +
+                    "WHERE license_number = '" + license + "'");
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                patients.add(new Patient(resultSet.getString(1),
+                        resultSet.getString(2), resultSet.getString(3),
+                        resultSet.getDate(4), resultSet.getInt(5)));
+            }
+        } else {
+            DAOPatientImpl daoPatient = DAOFactoryImpl.getInstance().getDAOPatientImpl(connection);
+            patients = daoPatient.getAllPatients();
         }
 
         request.setAttribute("patients", patients);
