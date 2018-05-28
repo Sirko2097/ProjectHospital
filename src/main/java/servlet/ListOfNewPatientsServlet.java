@@ -51,8 +51,6 @@ public class ListOfNewPatientsServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         List<Patient> patients = new ArrayList<>();
-
-        String cardNumber = request.getParameter("cardNumber");
         String license = session.getAttribute("license").toString();
 
         if (request.getSession().getAttribute("position") != null) {
@@ -74,14 +72,12 @@ public class ListOfNewPatientsServlet extends HttpServlet {
                         resultSet.getString(2), resultSet.getString(3),
                         resultSet.getDate(4), resultSet.getInt(5)));
             }
+
         } else {
             DAOPatientImpl daoPatient = DAOFactoryImpl.getInstance().getDAOPatientImpl(connection);
             patients = daoPatient.getAllPatients();
         }
-
-        request.setAttribute("patients", patients);
-        session.setAttribute("cardNumber", cardNumber);
+        session.setAttribute("patients", patients);
         request.getRequestDispatcher("jsp/listOfNewPatients.jsp").forward(request, response);
-
     }
 }

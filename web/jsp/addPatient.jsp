@@ -22,7 +22,7 @@
         <form action="addPatient" method="post">
             <div class="form-group">
                 <label>Passport Number:</label>
-                <input type="text" title="** 000000" class="form-control" id="passNumber" name="passNumber" placeholder="Enter patient's passport number" pattern="[A-Z}{2} [0-9]{6}" required>
+                <input type="text" title="** 000000" class="form-control" id="passNumber" name="passNumber" placeholder="Enter patient's passport number" pattern="[A-Z,a-z]{2} [0-9]{6}" required>
             </div>
             <div class="form-group">
                 <label>First Name:</label>

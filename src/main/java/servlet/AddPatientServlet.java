@@ -43,6 +43,7 @@ public class AddPatientServlet extends HttpServlet {
             daoPatient.AddNewPatient(passNumber, firstName, secondName, lastName, birthday, cardNumber);
             doGet(req, resp);
         } catch (SQLException e) {
+            req.getRequestDispatcher("jsp/errorAddingPatient.jsp").forward(req, resp);
             e.printStackTrace();
         }
     }

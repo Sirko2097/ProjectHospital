@@ -57,7 +57,7 @@ public class DAOPatientImpl implements DAOPatient {
             connection.commit();
         } catch (SQLException e) {
             connection.rollback();
-            e.printStackTrace();
+            throw new SQLException();
         }
     }
 

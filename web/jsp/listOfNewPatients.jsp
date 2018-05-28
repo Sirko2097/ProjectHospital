@@ -31,7 +31,7 @@
         </thead>
         <tbody>
             <%
-                List<Patient> patients = (List<Patient>) request.getAttribute("patients");
+                List<Patient> patients = (List<Patient>) request.getSession().getAttribute("patients");
                 if (patients != null && !patients.isEmpty()) {
                     for (Patient patient : patients) {
                         out.println("<tr class=\"info\">" +
@@ -46,13 +46,10 @@
             %>
         </tbody>
     </table>
-        <div>
-            <input type="text" title="Input card number of patient, whom you need to treat" name="cardNumber">
-            <input type="submit" class="btn btn-primary" onclick="location.href='/addTreatment'">
-        </div>
     </div>
 <div class="footer">
-    <input type="button" class="btn btn-info" value="Back to Main Menu" onclick="location='jsp/mainMenu.jsp';"/>
+    <input type="button" class="btn btn-info" value="Back to Main Menu" onclick="location='jsp/mainMenu.jsp'"/>
+    <input type="button" class="btn btn-primary" value="Add treatment" onclick="location.href='/addTreatment'">
     <input type="submit" class="btn btn-danger" value="Log Out" onclick="location.href='/logout'" align="right"/>
 </div>
 </body>

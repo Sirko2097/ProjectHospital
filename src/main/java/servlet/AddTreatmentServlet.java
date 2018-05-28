@@ -26,7 +26,7 @@ import java.util.List;
 public class AddTreatmentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/addTreatment.jsp");
         requestDispatcher.forward(req, resp);
     }
 
@@ -39,7 +39,10 @@ public class AddTreatmentServlet extends HttpServlet {
         }
     }
 
-    private void addTreatment(HttpServletRequest req, HttpServletResponse resp) throws SQLException {
+    /**
+     * This method insert treatment which doctor inputs.
+     * */
+    private void addTreatment(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
         DAOFactoryImpl daoFactory = DAOFactoryImpl.getInstance();
         Connection connection = daoFactory.getConnection();
         HttpSession session = req.getSession();
@@ -47,9 +50,15 @@ public class AddTreatmentServlet extends HttpServlet {
         String license = session.getAttribute("license").toString();
         String medicines = req.getParameter("medicines");
         String procedures = req.getParameter("procedures");
-        int operation = Integer.parseInt(req.getParameter("operation"));
-        int cardNumber = Integer.parseInt(session.getAttribute("cardNumber").toString());
 
+        int operation = 0;
+        if (req.getParameter("operation") != null){
+            operation = Integer.parseInt(req.getParameter("operation"));
+        }
+
+//        System.out.println(session.getAttribute("cardNumberOfNewPatient").toString());
+        int cardNumber = Integer.parseInt(req.getParameter("cardNumber"));
+        System.out.println(cardNumber);
         try {
             connection.setAutoCommit(false);
 
@@ -64,17 +73,42 @@ public class AddTreatmentServlet extends HttpServlet {
                     "  JOIN PATIENT P ON HUMAN.passport_number = P.passport_number\n" +
                     "  JOIN DOCTOR_PATIENT D ON P.card_number = D.patient_card\n" +
                     "  JOIN DOCTOR D2 on D.license = D2.license_number\n" +
-                    "WHERE card_number=" + cardNumber);
+                    "WHERE card_number='" + cardNumber + "'");
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            Patient patient = new Patient(resultSet.getString(1), resultSet.getString(2),
+            if (resultSet.next()) {
+                Patient patient = new Patient(resultSet.getString(1), resultSet.getString(2),
                         resultSet.getString(3), resultSet.getString(4), resultSet.getDate(5),
                         resultSet.getInt(6));
+                req.setAttribute("patient", patient);
+            }
+            preparedStatement = connection.prepareStatement("INSERT INTO TREATMENT (operation_necessity) " +
+                    "VALUE (" + operation + ")");
+            preparedStatement.execute();
 
+            preparedStatement = connection.prepareStatement("SELECT COUNT(treatment_id) FROM TREATMENT");
+            resultSet = preparedStatement.executeQuery();
+            int treatmentCounter = 0;
+            if (resultSet.next()) {
+                treatmentCounter = resultSet.getInt(1);
+            }
+            preparedStatement = connection.prepareStatement("INSERT INTO CARD(card_number, treat_id) " +
+                    "VALUES ('" + cardNumber +"', " + treatmentCounter + ")");
+            preparedStatement.execute();
+
+            preparedStatement = connection.prepareStatement("INSERT INTO TREATMENT_MEDICINE (treat_id, medicine_name) " +
+                    "VALUES ("+ treatmentCounter+", '"+ medicines +"')");
+            preparedStatement.execute();
+
+            preparedStatement = connection.prepareStatement("INSERT INTO TREATMENT_PROCEDURE (treat_id, procedure_name) " +
+                    "VALUES ("+ treatmentCounter+", '" + procedures+"')");
+            preparedStatement.execute();
 
             connection.commit();
+            doGet(req, resp);
         } catch (SQLException e) {
             connection.rollback();
+            /*error page*/
             e.printStackTrace();
         }
     }
