@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,10 +48,13 @@ public class ListOfNewPatientsServlet extends HttpServlet {
      * */
     private void getAllNewPatients(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         Connection connection = DAOFactoryImpl.getInstance().getConnection();
+        HttpSession session = request.getSession();
 
         List<Patient> patients = new ArrayList<>();
 
-        String license = request.getSession().getAttribute("license").toString();
+        String cardNumber = request.getParameter("cardNumber");
+        String license = session.getAttribute("license").toString();
+
         if (request.getSession().getAttribute("position") != null) {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT\n" +
                     "  first_name,\n" +
@@ -76,8 +80,8 @@ public class ListOfNewPatientsServlet extends HttpServlet {
         }
 
         request.setAttribute("patients", patients);
+        session.setAttribute("cardNumber", cardNumber);
         request.getRequestDispatcher("jsp/listOfNewPatients.jsp").forward(request, response);
-
 
     }
 }

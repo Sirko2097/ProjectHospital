@@ -19,10 +19,10 @@
     </div>
 
     <div class="jumbotron">
-        <form method="post">
+        <form action="addPatient" method="post">
             <div class="form-group">
                 <label>Passport Number:</label>
-                <input type="text" class="form-control" id="passNumber" name="passNumber" placeholder="Enter patient's passport number" required>
+                <input type="text" title="** 000000" class="form-control" id="passNumber" name="passNumber" placeholder="Enter patient's passport number" pattern="[A-Z}{2} [0-9]{6}" required>
             </div>
             <div class="form-group">
                 <label>First Name:</label>
@@ -42,7 +42,7 @@
             </div>
             <div class="form-group">
                 <label>Card number:</label>
-                <input type="text" class="form-control" name="cardNumber" placeholder="Enter patient's card number" pattern="^[1-9][0-9]{8}" required>
+                <input type="text" class="form-control" title="Nine numbers" name="cardNumber" placeholder="Enter patient's card number" pattern="^[1-9][0-9]{8}" required>
             </div>
             <input type="submit" class="btn btn-info" value="Add patient"/>
         </form>
