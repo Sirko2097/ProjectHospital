@@ -1,4 +1,4 @@
-package servlet;
+package servlets;
 
 import dao.implementations.DAOFactoryImpl;
 import dao.implementations.DAOPatientImpl;
@@ -20,8 +20,8 @@ import java.util.List;
 
 
 /**
- * This servlet was developed for producing main function of application.
- * From this servlet doctor can write a patient's medical certificate.
+ * This servlets was developed for producing main function of application.
+ * From this servlets doctor can write a patient's medical certificate.
  * */
 @WebServlet("/newPatients")
 public class ListOfNewPatientsServlet extends HttpServlet {

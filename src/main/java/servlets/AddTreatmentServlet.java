@@ -1,4 +1,4 @@
-package servlet;
+package servlets;
 
 import dao.implementations.DAOFactoryImpl;
 import model.Patient;
@@ -18,7 +18,7 @@ import java.sql.SQLException;
 
 
 /**
- * In this servlet doctor can add treatment and operation.
+ * In this servlets doctor can add treatment and operation.
  * */
 @WebServlet("/addTreatment")
 public class AddTreatmentServlet extends HttpServlet {
@@ -52,7 +52,6 @@ public class AddTreatmentServlet extends HttpServlet {
             operation = Integer.parseInt(req.getParameter("operation"));
         }
 
-//        System.out.println(session.getAttribute("cardNumberOfNewPatient").toString());
         int cardNumber = Integer.parseInt(req.getParameter("cardNumber"));
         System.out.println(cardNumber);
         try {
@@ -104,7 +103,7 @@ public class AddTreatmentServlet extends HttpServlet {
             doGet(req, resp);
         } catch (SQLException e) {
             connection.rollback();
-            req.getRequestDispatcher("jsp/errorAddTreatment.jsp").forward(req, resp);
+            req.getRequestDispatcher("jsp/error/errorAddTreatment.jsp").forward(req, resp);
             e.printStackTrace();
         }
     }

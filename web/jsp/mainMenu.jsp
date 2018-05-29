@@ -17,19 +17,24 @@
     <div class="page-header">
         <h2 align="center">
         <%
-            if(request.getSession().getAttribute("lastName") != null) {
+            if(request.getSession().getAttribute("lastName") != null && request.getSession().getAttribute("position") != null) {
                 out.println("Welcome, " + request.getSession().getAttribute("position")
                         + request.getSession().getAttribute("lastName") + "!");
+            }
+            else if (request.getSession().getAttribute("lastName") != null) {
+                out.println("Welcome, " + request.getSession().getAttribute("lastName") + "!");
             }
         %>
         </h2>
     </div>
     <br><br>
-    <input type="button" class="btn btn-info" value="Your New Patients" onclick="location.href='/newPatients'"/>
-    <input type="button" class="btn btn-info" value="All Patients" onclick="location.href='/allPatients'"/>
-    <input type="button" class="btn btn-primary" value="Add New Patient" onclick="location.href='/addPatient'"/>
-    <div class="footer">
-        <input type="submit" class="btn btn-danger" value="Log Out" onclick="location.href='/logout'" align="right"/>
+
+    <div class="btn-group">
+        <input type="button" class="btn btn-warning" value="Your New Patients" onclick="location.href='/newPatients'">
+        <input type="button" class="btn btn-info" value="All Patients" onclick="location.href='/allPatients'"/>
+        <input type="button" class="btn btn-primary" value="Add New Patient" onclick="location.href='/addPatient'"/>
     </div>
+    <input type="submit" class="btn btn-danger" value="Log Out" onclick="location.href='/logout'" align="right"/>
+
 </body>
 </html>

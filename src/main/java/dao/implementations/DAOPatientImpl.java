@@ -84,4 +84,56 @@ public class DAOPatientImpl implements DAOPatient {
         }
         return patients;
     }
+
+    @Override
+    public void addDoctor(String license, String patientPassNumber) throws SQLException {
+        int cardNumber;
+
+        try {
+            connection.setAutoCommit(false);
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT card_number\n" +
+                    "FROM PATIENT\n" +
+                    "  JOIN HUMAN H on PATIENT.passport_number = H.passport_number\n" +
+                    "where H.passport_number = '" + patientPassNumber + "'");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                cardNumber =resultSet.getInt(1);
+            } else throw new SQLException();
+
+            preparedStatement = connection.prepareStatement("INSERT INTO DOCTOR_PATIENT (license, patient_card) " +
+                    "VALUES ('" + license +"', " + cardNumber +")");
+            preparedStatement.execute();
+            connection.commit();
+        } catch (SQLException e) {
+            connection.rollback();
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public List<Patient> existing(List<Patient> patients) throws SQLException {
+        List<Patient> checkPatient = new ArrayList<>();
+
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT\n" +
+                "  H.passport_number,\n" +
+                "  first_name,\n" +
+                "  second_name,\n" +
+                "  last_name,\n" +
+                "  birthday,\n" +
+                "  patient_card\n" +
+                "FROM PATIENT\n" +
+                "  LEFT JOIN DOCTOR_PATIENT D on PATIENT.card_number = D.patient_card\n" +
+                "  JOIN HUMAN H on PATIENT.passport_number = H.passport_number\n" +
+                "where patient_card IS NUll;");
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            checkPatient.add(new Patient(resultSet.getString(1), resultSet.getString(2),
+                    resultSet.getString(3), resultSet.getString(4), resultSet.getDate(5),
+                    resultSet.getInt(6)));
+        }
+
+        return checkPatient;
+    }
 }

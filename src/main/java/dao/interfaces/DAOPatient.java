@@ -13,4 +13,8 @@ public interface DAOPatient {
 
     void AddNewPatient(String passNumber, String firstName, String secondName,
                        String lastName, String birthday, String cardNumber) throws SQLException;
+
+    List<Patient> existing(List<Patient> patients) throws SQLException;
+
+    void addDoctor(String license, String patientPassNumber) throws SQLException;
 }

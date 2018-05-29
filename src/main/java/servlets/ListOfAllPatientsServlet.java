@@ -1,4 +1,4 @@
-package servlet;
+package servlets;
 
 import dao.implementations.DAOFactoryImpl;
 import dao.implementations.DAOPatientImpl;
@@ -45,6 +45,7 @@ public class ListOfAllPatientsServlet extends HttpServlet {
 
         List<Patient> patients = daoPatient.getAllPatients();
         request.setAttribute("patientsInTheHospital", patients);
+        request.getSession().setAttribute("patientsInTheHospital", patients);
         request.getRequestDispatcher("jsp/allPatients.jsp").forward(request, response);
     }
 }

@@ -1,4 +1,4 @@
-package servlet;
+package servlets;
 
 import dao.implementations.DAODoctorImpl;
 import dao.implementations.DAOFactoryImpl;
@@ -13,7 +13,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * This servlet is using only by doctors or nurses,
+ * This servlets is using only by doctors or nurses,
  * because only of their job and access level.
   */
 @WebServlet("/login")
@@ -49,7 +49,7 @@ public class LogInServlet extends HttpServlet {
                 lastName = daoNurse.read(license).getLastName();
                 sessionCreator(req, resp, null, license, lastName);
             } else {
-                resp.sendRedirect("jsp/errorPage.jsp");
+                resp.sendRedirect("jsp/error/errorPage.jsp");
             }
         } catch (SQLException e) {
             e.printStackTrace();

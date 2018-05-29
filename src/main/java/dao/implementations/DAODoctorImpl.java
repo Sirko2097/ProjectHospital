@@ -7,10 +7,14 @@ import model.Patient;
 import java.sql.*;
 import java.util.List;
 
+/**
+ * This is implementation of daoDoctor interface which is using for
+ * processing data with doctors and their patients.
+ * */
 public class DAODoctorImpl implements DAODoctor {
     private final Connection connection;
 
-    public DAODoctorImpl(Connection connection) {
+    DAODoctorImpl(Connection connection) {
         this.connection = connection;
     }
 

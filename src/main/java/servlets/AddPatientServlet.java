@@ -1,8 +1,7 @@
-package servlet;
+package servlets;
 
 import dao.implementations.DAOFactoryImpl;
 import dao.implementations.DAOPatientImpl;
-import dao.interfaces.DAOFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +14,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * This servlet add's new patient to list of all patients in the hospital.
+ * This servlets add's new patient to list of all patients in the hospital.
  * */
 @WebServlet("/addPatient")
 public class AddPatientServlet extends HttpServlet {
@@ -43,7 +42,7 @@ public class AddPatientServlet extends HttpServlet {
             daoPatient.AddNewPatient(passNumber, firstName, secondName, lastName, birthday, cardNumber);
             doGet(req, resp);
         } catch (SQLException e) {
-            req.getRequestDispatcher("jsp/errorAddingPatient.jsp").forward(req, resp);
+            req.getRequestDispatcher("jsp/error/errorAddingPatient.jsp").forward(req, resp);
             e.printStackTrace();
         }
     }
