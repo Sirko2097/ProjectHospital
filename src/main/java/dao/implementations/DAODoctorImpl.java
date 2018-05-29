@@ -46,7 +46,7 @@ public class DAODoctorImpl implements DAODoctor {
      * @return list of patients
      * */
     @Override
-    public List<Patient> getAllPatients(String licenseNumber) throws SQLException {
+    public List<Patient> getAllHistoryOfPatients(String licenseNumber) throws SQLException {
         /*Add sicknesses*/
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT first_name, second_name, last_name, card_number" +
                 " FROM HUMAN JOIN PATIENT P on HUMAN.passport_number = P.passport_number " +

@@ -11,5 +11,5 @@ public interface DAODoctor {
 
     boolean docLogin(String licenseNumber, String password) throws SQLException;
 
-    List<Patient> getAllPatients(String licenseNumber) throws SQLException;
+    List<Patient> getAllHistoryOfPatients(String licenseNumber) throws SQLException;
 }
