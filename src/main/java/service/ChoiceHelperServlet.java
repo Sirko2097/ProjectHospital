@@ -1,8 +1,7 @@
-package controller;
+package service;
 
 import dao.implementations.DAOFactoryImpl;
 import dao.implementations.DAOPatientImpl;
-import model.Patient;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
