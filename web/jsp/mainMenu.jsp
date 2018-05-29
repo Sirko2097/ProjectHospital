@@ -15,6 +15,10 @@
 </head>
 <body class="container">
     <%
+        response.setHeader("Cache-Control","no-cache");
+        response.setHeader("Cache-Control","no-store");
+        response.setHeader("Pragma","no-cache");
+        response.setDateHeader ("Expires", 0);
         if(session.getAttribute("license")==null)
             request.getRequestDispatcher("/login").forward(request, response);
     %>

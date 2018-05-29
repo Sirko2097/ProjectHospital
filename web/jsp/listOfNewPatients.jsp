@@ -17,6 +17,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body class="container">
+<%
+    response.setHeader("Cache-Control","no-cache");
+    response.setHeader("Cache-Control","no-store");
+    response.setHeader("Pragma","no-cache");
+    response.setDateHeader ("Expires", 0);
+    if(session.getAttribute("license")==null)
+        request.getRequestDispatcher("/login").forward(request, response);
+%>
     <div class="page-header"><h2 align="center">Your new patients</h2></div>
     <div class="jumbotron">
     <table class="table table-hover">
