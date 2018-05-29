@@ -18,21 +18,33 @@
     <div class="page-header" align="center">
         <h2>Add information about medicines and procedures for patient</h2>
     </div>
-
-    <%
-        List<Patient> patients = (List<Patient>) request.getSession().getAttribute("patients");
-        if (patients != null && !patients.isEmpty()) {
-            for (Patient patient : patients) {
-                out.println("<tr class=\"info\">" +
-                        "<td>" + patient.getFirstName() + "</td>" +
-                        "<td>" + patient.getSecondName() + "</td>" +
-                        "<td>" + patient.getLastName() + "</td>" +
-                        "<td>" + patient.getBirthday() + "</td>" +
-                        "<td>" + patient.getPatientCard() + "</td>" +
-                        "</tr>");
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>First name</th>
+            <th>Second name</th>
+            <th>Last name</th>
+            <th>Birthday</th>
+            <th>Card Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%
+            List<Patient> patients = (List<Patient>) request.getSession().getAttribute("patients");
+            if (patients != null && !patients.isEmpty()) {
+                for (Patient patient : patients) {
+                    out.println("<tr class=\"info\">" +
+                            "<td>" + patient.getFirstName() + "</td>" +
+                            "<td>" + patient.getSecondName() + "</td>" +
+                            "<td>" + patient.getLastName() + "</td>" +
+                            "<td>" + patient.getBirthday() + "</td>" +
+                            "<td>" + patient.getPatientCard() + "</td>" +
+                            "</tr>");
+                }
             }
-        }
-    %>
+        %>
+        </tbody>
+    </table>
     <div class="jumbotron">
         <form method="post">
             <div class="form-group">

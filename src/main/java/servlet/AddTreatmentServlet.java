@@ -9,14 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 /**
@@ -45,9 +43,7 @@ public class AddTreatmentServlet extends HttpServlet {
     private void addTreatment(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
         DAOFactoryImpl daoFactory = DAOFactoryImpl.getInstance();
         Connection connection = daoFactory.getConnection();
-        HttpSession session = req.getSession();
 
-        String license = session.getAttribute("license").toString();
         String medicines = req.getParameter("medicines");
         String procedures = req.getParameter("procedures");
 
@@ -108,7 +104,7 @@ public class AddTreatmentServlet extends HttpServlet {
             doGet(req, resp);
         } catch (SQLException e) {
             connection.rollback();
-            /*error page*/
+            req.getRequestDispatcher("jsp/errorAddTreatment.jsp").forward(req, resp);
             e.printStackTrace();
         }
     }
