@@ -1,4 +1,4 @@
-package servlets;
+package servlets.addInfo;
 
 import dao.implementations.DAOFactoryImpl;
 import dao.implementations.DAOPatientImpl;
@@ -28,6 +28,7 @@ public class AddPatientServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DAOFactoryImpl daoFactory = DAOFactoryImpl.getInstance();
         Connection connection;
+        req.setCharacterEncoding("utf8");
 
         String passNumber = req.getParameter("passNumber").toUpperCase();
         String firstName = req.getParameter("firstName");

@@ -13,7 +13,7 @@
     <schema id="4" parent="1" name="hospitalDB">
       <Current>1</Current>
       <Visible>1</Visible>
-      <Collation>utf8_general_ci</Collation>
+      <Collation>utf8mb4_unicode_ci</Collation>
     </schema>
     <schema id="5" parent="1" name="information_schema">
       <Collation>utf8_general_ci</Collation>
@@ -923,462 +923,384 @@
     </collation>
     <table id="233" parent="4" name="CARD">
       <Engine>InnoDB</Engine>
-      <Collation>latin1_swedish_ci</Collation>
     </table>
     <table id="234" parent="4" name="CARD_DIAGNOSIS">
       <Engine>InnoDB</Engine>
-      <Collation>latin1_swedish_ci</Collation>
     </table>
     <table id="235" parent="4" name="DIAGNOSIS">
       <Engine>InnoDB</Engine>
-      <Collation>latin1_swedish_ci</Collation>
     </table>
-    <table id="236" parent="4" name="DISEASE">
+    <table id="236" parent="4" name="DOCTOR">
       <Engine>InnoDB</Engine>
-      <Collation>latin1_swedish_ci</Collation>
     </table>
-    <table id="237" parent="4" name="DOCTOR">
+    <table id="237" parent="4" name="DOCTOR_PATIENT">
       <Engine>InnoDB</Engine>
-      <Collation>latin1_swedish_ci</Collation>
     </table>
-    <table id="238" parent="4" name="DOCTOR_PATIENT">
+    <table id="238" parent="4" name="HUMAN">
       <Engine>InnoDB</Engine>
-      <Collation>latin1_swedish_ci</Collation>
     </table>
-    <table id="239" parent="4" name="HUMAN">
+    <table id="239" parent="4" name="NURSE">
       <Engine>InnoDB</Engine>
-      <Collation>latin1_swedish_ci</Collation>
     </table>
-    <table id="240" parent="4" name="MEDICINE">
+    <table id="240" parent="4" name="NURSE-PATIENT">
       <Engine>InnoDB</Engine>
-      <Collation>latin1_swedish_ci</Collation>
     </table>
-    <table id="241" parent="4" name="NURSE">
+    <table id="241" parent="4" name="PATIENT">
       <Engine>InnoDB</Engine>
-      <Collation>latin1_swedish_ci</Collation>
     </table>
-    <table id="242" parent="4" name="NURSE-PATIENT">
+    <table id="242" parent="4" name="TREATMENT">
       <Engine>InnoDB</Engine>
-      <Collation>latin1_swedish_ci</Collation>
     </table>
-    <table id="243" parent="4" name="PATIENT">
+    <table id="243" parent="4" name="TREATMENT_MEDICINE">
       <Engine>InnoDB</Engine>
-      <Collation>latin1_swedish_ci</Collation>
     </table>
-    <table id="244" parent="4" name="PROCEDURE">
+    <table id="244" parent="4" name="TREATMENT_PROCEDURE">
       <Engine>InnoDB</Engine>
-      <Collation>latin1_swedish_ci</Collation>
     </table>
-    <table id="245" parent="4" name="TREATMENT">
-      <Engine>InnoDB</Engine>
-      <Collation>latin1_swedish_ci</Collation>
-    </table>
-    <table id="246" parent="4" name="TREATMENT_MEDICINE">
-      <Engine>InnoDB</Engine>
-      <Collation>latin1_swedish_ci</Collation>
-    </table>
-    <table id="247" parent="4" name="TREATMENT_PROCEDURE">
-      <Engine>InnoDB</Engine>
-      <Collation>latin1_swedish_ci</Collation>
-    </table>
-    <column id="248" parent="233" name="card_number">
+    <column id="245" parent="233" name="card_number">
       <Position>1</Position>
       <DataType>int(10) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="249" parent="233" name="treat_id">
+    <column id="246" parent="233" name="treat_id">
       <Position>2</Position>
       <DataType>int(5) unsigned|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="250" parent="233" name="treat_card_fk">
+    <index id="247" parent="233" name="card_patient_fk">
+      <ColNames>card_number</ColNames>
+    </index>
+    <index id="248" parent="233" name="treat_card_fk">
       <ColNames>treat_id</ColNames>
     </index>
-    <key id="251" parent="233" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>card_number</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="252" parent="233" name="card_patient_fk">
+    <foreign-key id="249" parent="233" name="card_patient_fk">
       <ColNames>card_number</ColNames>
       <RefSchemaName>hospitalDB</RefSchemaName>
       <RefTableName>PATIENT</RefTableName>
       <RefColNames>card_number</RefColNames>
     </foreign-key>
-    <foreign-key id="253" parent="233" name="treat_card_fk">
+    <foreign-key id="250" parent="233" name="treat_card_fk">
       <ColNames>treat_id</ColNames>
       <RefSchemaName>hospitalDB</RefSchemaName>
       <RefTableName>TREATMENT</RefTableName>
       <RefColNames>treatment_id</RefColNames>
     </foreign-key>
-    <column id="254" parent="234" name="card_num">
+    <column id="251" parent="234" name="card_num">
       <Position>1</Position>
       <DataType>int(10) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="255" parent="234" name="diag_id">
+    <column id="252" parent="234" name="diag_id">
       <Position>2</Position>
       <DataType>int(5) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="256" parent="234" name="diagnosis_fk">
+    <index id="253" parent="234" name="diagnosis_fk">
       <ColNames>diag_id</ColNames>
     </index>
-    <key id="257" parent="234" name="PRIMARY">
+    <key id="254" parent="234" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>card_num
 diag_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="258" parent="234" name="card_num_fk">
+    <foreign-key id="255" parent="234" name="card_num_fk">
       <ColNames>card_num</ColNames>
       <RefSchemaName>hospitalDB</RefSchemaName>
       <RefTableName>CARD</RefTableName>
       <RefColNames>card_number</RefColNames>
     </foreign-key>
-    <foreign-key id="259" parent="234" name="diagnosis_fk">
+    <foreign-key id="256" parent="234" name="diagnosis_fk">
       <ColNames>diag_id</ColNames>
       <RefSchemaName>hospitalDB</RefSchemaName>
       <RefTableName>DIAGNOSIS</RefTableName>
       <RefColNames>diagnosis_id</RefColNames>
     </foreign-key>
-    <column id="260" parent="235" name="diagnosis_id">
+    <column id="257" parent="235" name="diagnosis_id">
       <Position>1</Position>
       <DataType>int(5) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="261" parent="235" name="disease_name">
+    <column id="258" parent="235" name="disease_name">
       <Position>2</Position>
-      <DataType>varchar(30)|0s</DataType>
+      <DataType>varchar(191)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="262" parent="235" name="date">
+    <column id="259" parent="235" name="date">
       <Position>3</Position>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="263" parent="235" name="disese_fk">
+    <index id="260" parent="235" name="disese_fk">
       <ColNames>disease_name</ColNames>
     </index>
-    <key id="264" parent="235" name="PRIMARY">
+    <key id="261" parent="235" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>diagnosis_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="265" parent="235" name="disese_fk">
-      <ColNames>disease_name</ColNames>
-      <RefSchemaName>hospitalDB</RefSchemaName>
-      <RefTableName>DISEASE</RefTableName>
-      <RefColNames>name</RefColNames>
-    </foreign-key>
-    <column id="266" parent="236" name="name">
+    <column id="262" parent="236" name="license_number">
       <Position>1</Position>
-      <DataType>varchar(30)|0s</DataType>
+      <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="267" parent="236" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>name</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="268" parent="237" name="license_number">
-      <Position>1</Position>
-      <DataType>varchar(15)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="269" parent="237" name="passport_number">
+    <column id="263" parent="236" name="passport_number">
       <Position>2</Position>
-      <DataType>varchar(15)|0s</DataType>
+      <DataType>varchar(191)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="270" parent="237" name="password">
+    <column id="264" parent="236" name="password">
       <Position>3</Position>
-      <DataType>varchar(15)|0s</DataType>
-      <NotNull>1</NotNull>
+      <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="271" parent="237" name="doc_human_fk">
+    <index id="265" parent="236" name="doc_human_fk">
       <ColNames>passport_number</ColNames>
     </index>
-    <key id="272" parent="237" name="PRIMARY">
+    <key id="266" parent="236" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>license_number</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="273" parent="237" name="doc_human_fk">
+    <foreign-key id="267" parent="236" name="doc_human_fk">
       <ColNames>passport_number</ColNames>
       <RefSchemaName>hospitalDB</RefSchemaName>
       <RefTableName>HUMAN</RefTableName>
       <RefColNames>passport_number</RefColNames>
     </foreign-key>
-    <column id="274" parent="238" name="license">
+    <column id="268" parent="237" name="license">
       <Position>1</Position>
-      <DataType>varchar(15)|0s</DataType>
+      <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="275" parent="238" name="patient_card">
+    <column id="269" parent="237" name="patient_card">
       <Position>2</Position>
       <DataType>int(10) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="276" parent="238" name="patient_fk">
+    <index id="270" parent="237" name="patient_fk">
       <ColNames>patient_card</ColNames>
     </index>
-    <key id="277" parent="238" name="PRIMARY">
+    <key id="271" parent="237" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>license
 patient_card</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="278" parent="238" name="doctor_fk">
+    <foreign-key id="272" parent="237" name="doctor_fk">
       <ColNames>license</ColNames>
       <RefSchemaName>hospitalDB</RefSchemaName>
       <RefTableName>DOCTOR</RefTableName>
       <RefColNames>license_number</RefColNames>
     </foreign-key>
-    <foreign-key id="279" parent="238" name="patient_fk">
+    <foreign-key id="273" parent="237" name="patient_fk">
       <ColNames>patient_card</ColNames>
       <RefSchemaName>hospitalDB</RefSchemaName>
       <RefTableName>PATIENT</RefTableName>
       <RefColNames>card_number</RefColNames>
     </foreign-key>
-    <column id="280" parent="239" name="passport_number">
+    <column id="274" parent="238" name="passport_number">
       <Position>1</Position>
-      <DataType>varchar(15)|0s</DataType>
+      <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="281" parent="239" name="first_name">
+    <column id="275" parent="238" name="first_name">
       <Position>2</Position>
-      <DataType>varchar(30)|0s</DataType>
+      <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="282" parent="239" name="second_name">
+    <column id="276" parent="238" name="second_name">
       <Position>3</Position>
-      <DataType>varchar(30)|0s</DataType>
+      <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="283" parent="239" name="last_name">
+    <column id="277" parent="238" name="last_name">
       <Position>4</Position>
-      <DataType>varchar(30)|0s</DataType>
+      <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="284" parent="239" name="birthday">
+    <column id="278" parent="238" name="birthday">
       <Position>5</Position>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="285" parent="239" name="PRIMARY">
+    <key id="279" parent="238" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>passport_number</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="286" parent="240" name="name">
+    <column id="280" parent="239" name="license_number">
       <Position>1</Position>
-      <DataType>varchar(30)|0s</DataType>
+      <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="287" parent="240" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>name</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="288" parent="241" name="license_number">
-      <Position>1</Position>
-      <DataType>varchar(15)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="289" parent="241" name="passport_number">
+    <column id="281" parent="239" name="passport_number">
       <Position>2</Position>
-      <DataType>varchar(15)|0s</DataType>
+      <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="290" parent="241" name="password">
+    <column id="282" parent="239" name="password">
       <Position>3</Position>
-      <DataType>varchar(15)|0s</DataType>
+      <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="291" parent="241" name="nurse_human_fk">
+    <index id="283" parent="239" name="nurse_human_fk">
       <ColNames>passport_number</ColNames>
     </index>
-    <key id="292" parent="241" name="PRIMARY">
+    <key id="284" parent="239" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>license_number</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="293" parent="241" name="nurse_human_fk">
+    <foreign-key id="285" parent="239" name="nurse_human_fk">
       <ColNames>passport_number</ColNames>
       <RefSchemaName>hospitalDB</RefSchemaName>
       <RefTableName>HUMAN</RefTableName>
       <RefColNames>passport_number</RefColNames>
     </foreign-key>
-    <column id="294" parent="242" name="license">
+    <column id="286" parent="240" name="license">
       <Position>1</Position>
-      <DataType>varchar(15)|0s</DataType>
+      <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="295" parent="242" name="patient_card_number">
+    <column id="287" parent="240" name="patient_card_number">
       <Position>2</Position>
       <DataType>int(4) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="296" parent="242" name="patient_card_fk">
+    <index id="288" parent="240" name="patient_card_fk">
       <ColNames>patient_card_number</ColNames>
     </index>
-    <key id="297" parent="242" name="PRIMARY">
+    <key id="289" parent="240" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>license
 patient_card_number</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="298" parent="242" name="nurse_fk">
+    <foreign-key id="290" parent="240" name="nurse_fk">
       <ColNames>license</ColNames>
       <RefSchemaName>hospitalDB</RefSchemaName>
       <RefTableName>NURSE</RefTableName>
       <RefColNames>license_number</RefColNames>
     </foreign-key>
-    <foreign-key id="299" parent="242" name="patient_card_fk">
+    <foreign-key id="291" parent="240" name="patient_card_fk">
       <ColNames>patient_card_number</ColNames>
       <RefSchemaName>hospitalDB</RefSchemaName>
       <RefTableName>PATIENT</RefTableName>
       <RefColNames>card_number</RefColNames>
     </foreign-key>
-    <column id="300" parent="243" name="passport_number">
+    <column id="292" parent="241" name="passport_number">
       <Position>1</Position>
-      <DataType>varchar(15)|0s</DataType>
+      <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="301" parent="243" name="card_number">
+    <column id="293" parent="241" name="card_number">
       <Position>2</Position>
       <DataType>int(10) unsigned|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="302" parent="243" name="card_number">
+    <index id="294" parent="241" name="card_number">
       <ColNames>card_number</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="303" parent="243" name="PRIMARY">
+    <key id="295" parent="241" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>passport_number</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="304" parent="243" name="card_number">
+    <key id="296" parent="241" name="card_number">
       <ColNames>card_number</ColNames>
       <UnderlyingIndexName>card_number</UnderlyingIndexName>
     </key>
-    <foreign-key id="305" parent="243" name="patient_human_fk">
+    <foreign-key id="297" parent="241" name="patient_human_fk">
       <ColNames>passport_number</ColNames>
       <RefSchemaName>hospitalDB</RefSchemaName>
       <RefTableName>HUMAN</RefTableName>
       <RefColNames>passport_number</RefColNames>
     </foreign-key>
-    <column id="306" parent="244" name="name">
-      <Position>1</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <key id="307" parent="244" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>name</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="308" parent="245" name="treatment_id">
+    <column id="298" parent="242" name="treatment_id">
       <Position>1</Position>
       <DataType>int(5) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="309" parent="245" name="operation_necessity">
+    <column id="299" parent="242" name="operation_necessity">
       <Position>2</Position>
       <DataType>tinyint(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="310" parent="245" name="PRIMARY">
+    <key id="300" parent="242" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>treatment_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="311" parent="246" name="treat_id">
+    <column id="301" parent="243" name="treat_id">
       <Position>1</Position>
       <DataType>int(5) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="312" parent="246" name="medicine_name">
+    <column id="302" parent="243" name="medicine_name">
       <Position>2</Position>
-      <DataType>varchar(30)|0s</DataType>
+      <DataType>varchar(191)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="313" parent="246" name="medicine_fk">
+    <index id="303" parent="243" name="medicine_fk">
       <ColNames>medicine_name</ColNames>
     </index>
-    <key id="314" parent="246" name="PRIMARY">
+    <key id="304" parent="243" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>treat_id
 medicine_name</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="315" parent="246" name="treat_fk">
+    <foreign-key id="305" parent="243" name="treat_fk">
       <ColNames>treat_id</ColNames>
       <RefSchemaName>hospitalDB</RefSchemaName>
       <RefTableName>TREATMENT</RefTableName>
       <RefColNames>treatment_id</RefColNames>
     </foreign-key>
-    <foreign-key id="316" parent="246" name="medicine_fk">
-      <ColNames>medicine_name</ColNames>
-      <RefSchemaName>hospitalDB</RefSchemaName>
-      <RefTableName>MEDICINE</RefTableName>
-      <RefColNames>name</RefColNames>
-    </foreign-key>
-    <column id="317" parent="247" name="treat_id">
+    <column id="306" parent="244" name="treat_id">
       <Position>1</Position>
       <DataType>int(5) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="318" parent="247" name="procedure_name">
+    <column id="307" parent="244" name="procedure_name">
       <Position>2</Position>
-      <DataType>varchar(30)|0s</DataType>
+      <DataType>varchar(191)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="319" parent="247" name="procedure_fk">
+    <index id="308" parent="244" name="procedure_fk">
       <ColNames>procedure_name</ColNames>
     </index>
-    <key id="320" parent="247" name="PRIMARY">
+    <key id="309" parent="244" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>treat_id
 procedure_name</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="321" parent="247" name="treat_pr_fk">
+    <foreign-key id="310" parent="244" name="treat_pr_fk">
       <ColNames>treat_id</ColNames>
       <RefSchemaName>hospitalDB</RefSchemaName>
       <RefTableName>TREATMENT</RefTableName>
       <RefColNames>treatment_id</RefColNames>
-    </foreign-key>
-    <foreign-key id="322" parent="247" name="procedure_fk">
-      <ColNames>procedure_name</ColNames>
-      <RefSchemaName>hospitalDB</RefSchemaName>
-      <RefTableName>PROCEDURE</RefTableName>
-      <RefColNames>name</RefColNames>
     </foreign-key>
   </database-model>
 </dataSource>

@@ -31,6 +31,7 @@ public class DAODoctorImpl implements DAODoctor {
                 "  JOIN HUMAN H on DOCTOR.passport_number = H.passport_number " +
                 "WHERE `license_number`='" + key + "'");
         ResultSet resultSet = preparedStatement.executeQuery();
+
         if (resultSet.next()) {
             String licenseNUmber = resultSet.getString(1);
             String passNumber = resultSet.getString(2);

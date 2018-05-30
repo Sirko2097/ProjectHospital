@@ -1,7 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="model.Patient" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.io.PrintWriter" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: sirko
   Date: 22.05.18

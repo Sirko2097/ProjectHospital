@@ -3,9 +3,7 @@ package dao.implementations;
 import dao.interfaces.*;
 //import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * This class describes implementation of the Factory, which we use to connect to DB.
@@ -39,7 +37,7 @@ public class DAOFactoryImpl implements DAOFactory {
     public Connection getConnection() throws SQLException {
         String user = "root";
         String password = "123789Cthusq";
-        String url = "jdbc:mysql://localhost:3306/hospitalDB";
+        String url = "jdbc:mysql://localhost:3306/hospitalDB?useUnicode=true&characterEncoding=utf8";
         return DriverManager.getConnection(url, user, password);
     }
 

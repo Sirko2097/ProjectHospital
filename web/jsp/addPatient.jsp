@@ -5,7 +5,7 @@
   Time: 22:17
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=utf8" language="java" %>
 <html>
 <head>
     <title>Add New Patient</title>
@@ -30,7 +30,7 @@
         <form action="addPatient" method="post">
             <div class="form-group">
                 <label>Passport Number:</label>
-                <input type="text" title="** 000000" class="form-control" id="passNumber" name="passNumber" placeholder="Enter patient's passport number" pattern="[A-Z,a-z]{2} [0-9]{6}" required>
+                <input type="text" title="** 000000" class="form-control" id="passNumber" name="passNumber" placeholder="Enter patient's passport number" pattern="[A-Z,a-z,А-я]{2} [0-9]{6}" required>
             </div>
             <div class="form-group">
                 <label>First Name:</label>

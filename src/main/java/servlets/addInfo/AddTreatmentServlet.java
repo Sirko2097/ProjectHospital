@@ -1,4 +1,4 @@
-package servlets;
+package servlets.addInfo;
 
 import dao.implementations.DAOFactoryImpl;
 import model.Patient;
