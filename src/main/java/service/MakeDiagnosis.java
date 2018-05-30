@@ -2,6 +2,7 @@ package service;
 
 import dao.implementations.DAOFactoryImpl;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,34 +12,26 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @WebServlet("/diagnosis")
 public class MakeDiagnosis extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            makeDiagnosis(req, resp);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/service/addDiagnosis.jsp");
+        requestDispatcher.forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        DAOFactoryImpl daoFactory = DAOFactoryImpl.getInstance();
+        Connection connection = null;
         try {
-            makeDiagnosis(req, resp);
+            connection = daoFactory.getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
 
-    private void makeDiagnosis(HttpServletRequest req, HttpServletResponse resp) throws SQLException, UnsupportedEncodingException {
-        DAOFactoryImpl daoFactory = DAOFactoryImpl.getInstance();
-        Connection connection = daoFactory.getConnection();
-
-        HttpSession session = req.getSession();
         req.setCharacterEncoding("utf8");
         String cardNumber = req.getParameter("cardNumber");
         String diagnosis = req.getParameter("diagnosis");
@@ -64,11 +57,14 @@ public class MakeDiagnosis extends HttpServlet {
             preparedStatement.execute();
 
             connection.commit();
+            doGet(req, resp);
         } catch (SQLException e) {
-            connection.rollback();
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
             e.printStackTrace();
         }
-
-
     }
 }

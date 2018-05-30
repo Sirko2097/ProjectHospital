@@ -16,4 +16,8 @@ public class CertificateGenerator extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPost(req, resp);
     }
+
+    private void generate(HttpServletRequest req, HttpServletResponse resp) {
+
+    }
 }

@@ -56,6 +56,11 @@
     </div>
 <div class="footer">
     <input type="button" class="btn btn-primary" value="Add treatment" onclick="location.href='/addTreatment'">
+    <%
+        if(request.getSession().getAttribute("lastName") != null && request.getSession().getAttribute("position") != null) {
+            out.println("<input type=\"button\" class=\"btn btn-warning\" value=\"Diagnosis\" onclick=\"location.href='/diagnosis'\">");
+        }
+    %>
     <input type="button" class="btn btn-info" value="Back to Main Menu" onclick="location='jsp/mainMenu.jsp'"/>
     <input type="submit" class="btn btn-danger" value="Log Out" onclick="location.href='/logout'" align="right"/>
 </div>
