@@ -38,7 +38,7 @@
     <br><br>
 
     <div class="btn-group">
-        <input type="button" class="btn btn-warning" value="Your New Patients" onclick="location.href='/newPatients'">
+        <input type="button" class="btn btn-warning" value="Your Patients" onclick="location.href='/newPatients'">
         <input type="button" class="btn btn-info" value="All Patients" onclick="location.href='/allPatients'"/>
         <input type="button" class="btn btn-primary" value="Add New Patient" onclick="location.href='/addPatient'"/>
     </div>

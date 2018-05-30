@@ -40,6 +40,47 @@ public class DAOPatientImpl implements DAOPatient {
     }
 
     @Override
+    public List<String> getListOfPatientParameters(int cardNumber) throws SQLException {
+        List<String> listOfPatientParameters = new ArrayList<>();
+
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+                "P.passport_number,\n" +
+                "  first_name,\n" +
+                "  second_name,\n" +
+                "  last_name,\n" +
+                "  P.card_number,\n" +
+                "  medicine_name,\n" +
+                "  procedure_name,\n" +
+                "  disease_name,\n" +
+                "  date\n" +
+                "FROM HUMAN\n" +
+                "  JOIN PATIENT P on HUMAN.passport_number = P.passport_number\n" +
+                "  JOIN CARD C on P.card_number = C.card_number\n" +
+                "  JOIN TREATMENT T on C.treat_id = T.treatment_id\n" +
+                "  JOIN TREATMENT_MEDICINE MEDICINE on T.treatment_id = MEDICINE.treat_id\n" +
+                "  JOIN TREATMENT_PROCEDURE PROCEDURE2 on T.treatment_id = PROCEDURE2.treat_id\n" +
+                "  JOIN CARD_DIAGNOSIS C2 on C.card_number = C2.card_num\n" +
+                "  JOIN DIAGNOSIS D on C2.diag_id = D.diagnosis_id\n" +
+                "  JOIN DOCTOR_PATIENT PATIENT2 on P.card_number = PATIENT2.patient_card\n" +
+                "WHERE P.card_number = ?");
+        preparedStatement.setInt(1, cardNumber);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            listOfPatientParameters.add(resultSet.getString(1));
+            listOfPatientParameters.add(resultSet.getString(2));
+            listOfPatientParameters.add(resultSet.getString(3));
+            listOfPatientParameters.add(resultSet.getString(4));
+            listOfPatientParameters.add(resultSet.getString(5));
+            listOfPatientParameters.add(resultSet.getString(6));
+            listOfPatientParameters.add(resultSet.getString(7));
+            listOfPatientParameters.add(resultSet.getString(8));
+            listOfPatientParameters.add(resultSet.getString(9));
+        }
+        return listOfPatientParameters;
+    }
+
+    @Override
     public void AddNewPatient(String passNumber, String firstName,  String secondName, String lastName,
                               String birthday, String cardNumber) throws SQLException{
         try {

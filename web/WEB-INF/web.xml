@@ -16,5 +16,8 @@
         <url-pattern>/history</url-pattern>
         <url-pattern>/allPatients</url-pattern>
         <url-pattern>/newPatients</url-pattern>
+        <url-pattern>/diagnosis</url-pattern>
+        <url-pattern>/history</url-pattern>
+        <url-pattern>/certificate</url-pattern>
     </filter-mapping>
 </web-app>

@@ -58,7 +58,8 @@
     <input type="button" class="btn btn-primary" value="Add treatment" onclick="location.href='/addTreatment'">
     <%
         if(request.getSession().getAttribute("lastName") != null && request.getSession().getAttribute("position") != null) {
-            out.println("<input type=\"button\" class=\"btn btn-warning\" value=\"Diagnosis\" onclick=\"location.href='/diagnosis'\">");
+            out.println("<input type=\"button\" class=\"btn btn-primary\" value=\"Add diagnosis\" onclick=\"location.href='/diagnosis'\">\n" +
+                    "<input type=\"button\" class=\"btn btn-info\" value=\"Show history of diseases\" onclick=\"location='jsp/certificate.jsp'\"/>");
         }
     %>
     <input type="button" class="btn btn-info" value="Back to Main Menu" onclick="location='jsp/mainMenu.jsp'"/>
