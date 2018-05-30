@@ -45,21 +45,7 @@ public class DAODoctorImpl implements DAODoctor {
         }
     }
 
-    /**
-     * This method returns all patients who the doctor treats
-     * @param licenseNumber - license number of doctor
-     * @return list of patients
-     * */
-    @Override
-    public List<Patient> getAllHistoryOfPatients(String licenseNumber) throws SQLException {
-        /*Add sicknesses*/
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT first_name, second_name, last_name, card_number" +
-                " FROM HUMAN JOIN PATIENT P on HUMAN.passport_number = P.passport_number " +
-                "JOIN DOCTOR_PATIENT D on P.card_number = D.patient_card " +
-                "WHERE license='" + licenseNumber +"'");
-        preparedStatement.execute();
-        return null;
-    }
+
 
     /**
      * This method checks the existing of doctor in DB(hospital)

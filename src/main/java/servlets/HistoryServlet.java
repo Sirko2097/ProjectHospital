@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  * This servlets output patient's history of sickness.
@@ -25,8 +28,12 @@ public class HistoryServlet extends HttpServlet {
         super.doPost(req, resp);
     }
 
-    private void getHistory(HttpServletRequest req, HttpServletResponse resp) {
+    private void getHistory(HttpServletRequest req, HttpServletResponse resp) throws SQLException, UnsupportedEncodingException {
         DAOFactoryImpl daoFactory = DAOFactoryImpl.getInstance();
+        Connection connection = daoFactory.getConnection();
+
+        req.setCharacterEncoding("utf8");
+        String disease = req.getParameter("disease");
 
     }
 }

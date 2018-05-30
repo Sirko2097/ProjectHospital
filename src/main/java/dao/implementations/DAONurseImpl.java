@@ -9,7 +9,7 @@ import java.sql.*;
 public class DAONurseImpl implements DAONurse {
     private final Connection connection;
 
-    public DAONurseImpl(Connection connection) {
+    DAONurseImpl(Connection connection) {
         this.connection = connection;
     }
 
@@ -27,8 +27,6 @@ public class DAONurseImpl implements DAONurse {
                 "  JOIN HUMAN H on NURSE.passport_number = H.passport_number " +
                 "WHERE `license_number`='" + key + "'");
         ResultSet resultSet = preparedStatement.executeQuery();
-        preparedStatement.execute("set character set utf8");
-        preparedStatement.execute("set names utf8");
         if (resultSet.next()) {
             String licenseNUmber = resultSet.getString(1);
             String passNumber = resultSet.getString(2);

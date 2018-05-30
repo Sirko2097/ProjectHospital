@@ -59,6 +59,7 @@
                 <label>Card number:</label>
                 <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="Enter cardNumber" required pattern="^[1-9][0-9]{8}">
             </div>
+
             <div class="form-group">
                 <label>Medicines:</label>
                 <input type="text" class="form-control" id="medicines" name="medicines" placeholder="Enter medicines">
@@ -67,11 +68,16 @@
                 <label>Procedures:</label>
                 <input type="text" class="form-control" name="Procedures" placeholder="Enter procedures" required>
             </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label><input type="radio" name="operation" value="1">Operation</label>
-                </div>
-            </div>
+            <%
+                if (request.getSession().getAttribute("position") != null) {
+                    out.println("<div class=\"form-group\">\n" +
+                            "                <div class=\"checkbox\">\n" +
+                            "                    <label><input type=\"radio\" name=\"operation\" value=\"1\">Operation</label>\n" +
+                            "                </div>\n" +
+                            "            </div>");
+                }
+            %>
+
             <input type="submit" class="btn btn-info" value="Add treatment"/>
         </form>
     </div>

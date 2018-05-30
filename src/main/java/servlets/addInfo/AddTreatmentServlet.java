@@ -14,7 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.Date;
 
 
 /**
@@ -44,6 +44,7 @@ public class AddTreatmentServlet extends HttpServlet {
         DAOFactoryImpl daoFactory = DAOFactoryImpl.getInstance();
         Connection connection = daoFactory.getConnection();
 
+        req.setCharacterEncoding("utf8");
         String medicines = req.getParameter("medicines");
         String procedures = req.getParameter("procedures");
 
@@ -53,7 +54,6 @@ public class AddTreatmentServlet extends HttpServlet {
         }
 
         int cardNumber = Integer.parseInt(req.getParameter("cardNumber"));
-        System.out.println(cardNumber);
         try {
             connection.setAutoCommit(false);
 
@@ -77,11 +77,12 @@ public class AddTreatmentServlet extends HttpServlet {
                         resultSet.getInt(6));
                 req.setAttribute("patient", patient);
             }
+
             preparedStatement = connection.prepareStatement("INSERT INTO TREATMENT (operation_necessity) " +
                     "VALUE (" + operation + ")");
             preparedStatement.execute();
 
-            preparedStatement = connection.prepareStatement("SELECT COUNT(treatment_id) FROM TREATMENT");
+            preparedStatement = connection.prepareStatement("SELECT treatment_id FROM TREATMENT");
             resultSet = preparedStatement.executeQuery();
             int treatmentCounter = 0;
             if (resultSet.next()) {

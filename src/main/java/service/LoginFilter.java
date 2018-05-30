@@ -5,6 +5,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import java.io.IOException;
 
+/**
+ * This filter checks the doctor's/nurse's login.
+ * If user logout - redirect to login servlet.
+ * */
 public class LoginFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

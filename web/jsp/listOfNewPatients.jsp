@@ -55,11 +55,7 @@
     </table>
     </div>
 <div class="footer">
-    <%
-        if (request.getSession().getAttribute("position") != null) {
-            out.println("<input type=\"button\" class=\"btn btn-primary\" value=\"Add treatment\" onclick=\"location.href='/addTreatment'\">");
-        }
-    %>
+    <input type="button" class="btn btn-primary" value="Add treatment" onclick="location.href='/addTreatment'">
     <input type="button" class="btn btn-info" value="Back to Main Menu" onclick="location='jsp/mainMenu.jsp'"/>
     <input type="submit" class="btn btn-danger" value="Log Out" onclick="location.href='/logout'" align="right"/>
 </div>
