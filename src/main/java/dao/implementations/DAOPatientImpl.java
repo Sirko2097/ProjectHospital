@@ -42,6 +42,11 @@ public class DAOPatientImpl implements DAOPatient {
     @Override
     public List<String> getListOfPatientParameters(int cardNumber) throws SQLException {
         List<String> listOfPatientParameters = new ArrayList<>();
+        int i = 0;
+        while (i < 10) {
+            listOfPatientParameters.add("");
+            i++;
+        }
 
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
                 "P.passport_number,\n" +
@@ -67,15 +72,32 @@ public class DAOPatientImpl implements DAOPatient {
 
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
-            listOfPatientParameters.add(resultSet.getString(1));
-            listOfPatientParameters.add(resultSet.getString(2));
-            listOfPatientParameters.add(resultSet.getString(3));
-            listOfPatientParameters.add(resultSet.getString(4));
-            listOfPatientParameters.add(resultSet.getString(5));
-            listOfPatientParameters.add(resultSet.getString(6));
-            listOfPatientParameters.add(resultSet.getString(7));
-            listOfPatientParameters.add(resultSet.getString(8));
-            listOfPatientParameters.add(resultSet.getString(9));
+            listOfPatientParameters.set(0, resultSet.getString(1));
+            listOfPatientParameters.set(1, resultSet.getString(2));
+            listOfPatientParameters.set(2, resultSet.getString(3));
+            listOfPatientParameters.set(3, resultSet.getString(4));
+            listOfPatientParameters.set(4, resultSet.getString(5));
+            listOfPatientParameters.set(5, resultSet.getString(6));
+            listOfPatientParameters.set(6, resultSet.getString(7));
+            listOfPatientParameters.set(7, resultSet.getString(8));
+            listOfPatientParameters.set(8, resultSet.getString(9));
+        } else {
+            preparedStatement = connection.prepareStatement("SELECT P.passport_number, first_name, second_name, " +
+                    "last_name, birthday, card_number " +
+                    "FROM HUMAN JOIN PATIENT P on HUMAN.passport_number = P.passport_number " +
+                    "WHERE card_number=" + cardNumber);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                Patient patient = new Patient(resultSet.getString(1), resultSet.getString(2),
+                        resultSet.getString(3), resultSet.getString(4),
+                        resultSet.getDate(5), resultSet.getInt(6));
+                listOfPatientParameters.set(0, patient.getPassportNumber());
+                listOfPatientParameters.set(1, patient.getFirstName());
+                listOfPatientParameters.set(2, patient.getSecondName());
+                listOfPatientParameters.set(3, patient.getLastName());
+                listOfPatientParameters.set(4, Integer.toString(patient.getPatientCard()));
+
+            }
         }
         return listOfPatientParameters;
     }

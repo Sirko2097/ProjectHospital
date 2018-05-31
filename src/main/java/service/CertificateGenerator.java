@@ -45,8 +45,11 @@ public class CertificateGenerator extends HttpServlet {
         }
 
 
-        if (listOfPatientParameters != null) {
-            listOfPatientParameters.add(doctorLastName);
+
+        {
+            if (listOfPatientParameters != null) {
+                listOfPatientParameters.set(listOfPatientParameters.size() - 1, doctorLastName);
+            }
         }
 
         session.setAttribute("patientsParameters", listOfPatientParameters);
